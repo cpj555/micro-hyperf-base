@@ -10,7 +10,7 @@ use Monolog\Formatter\LineFormatter;
 
 class TraceIdFormatter extends LineFormatter
 {
-    public const SIMPLE_FORMAT = "%datetime% [ %channel% ] %level_name% %trace_id% %new_trace_id% - %message% %context% %extra% \n";
+    public const SIMPLE_FORMAT = "%datetime% [ %channel% ] %level_name% %trace_id% - %message% %context% %extra% \n";
 
     public function format(array $record): string
     {
