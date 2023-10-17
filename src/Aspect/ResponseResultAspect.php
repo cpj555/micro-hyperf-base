@@ -15,11 +15,11 @@ use Hyperf\Di\Aop\ProceedingJoinPoint;
  */
 class ResponseResultAspect extends AbstractAspect
 {
-    public $annotations = [
+    public array $annotations = [
         ResponseResult::class,
     ];
 
-    private $responseResult;
+    private ResponseResultInterface $responseResult;
 
     public function __construct(ResponseResultInterface $responseResult)
     {

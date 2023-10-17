@@ -9,7 +9,7 @@ use Hyperf\DbConnection\Model\Model;
 
 abstract class BaseModel extends Model
 {
-    public $timestamps = false;
+    public bool $timestamps = false;
 
     public function newModelBuilder($query)
     {

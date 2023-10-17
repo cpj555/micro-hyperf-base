@@ -12,7 +12,7 @@ class NodeGenerator implements NodeInterface
 
     public function __construct(ContainerInterface $container)
     {
-        $this->nodeName = env('POD_NAME', bin2hex(random_bytes(8)));
+        $this->nodeName = (string)env('POD_NAME', bin2hex(random_bytes(8)));
     }
 
     public function getNodeName(): string

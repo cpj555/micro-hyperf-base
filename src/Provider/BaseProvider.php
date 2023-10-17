@@ -3,6 +3,7 @@
 declare(strict_types=1);
 namespace Losingbattle\MicroBase\Provider;
 
+use Hyperf\Codec\Json;
 use Losingbattle\MicroBase\Constants\Code;
 use Losingbattle\MicroBase\Constants\HeaderKeys;
 use Losingbattle\MicroBase\Constants\HttpStatusCode;
@@ -11,9 +12,8 @@ use Losingbattle\MicroBase\Events\HttpClientRequestExecuted;
 use Losingbattle\MicroBase\Exception\ProviderException;
 use GuzzleHttp\Client;
 use Hyperf\Guzzle\ClientFactory;
-use Hyperf\Utils\ApplicationContext;
+use Hyperf\Context\ApplicationContext;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use function GuzzleHttp\json_decode;
 
 abstract class BaseProvider
 {
@@ -82,7 +82,7 @@ abstract class BaseProvider
         return $this->request($url, 'POST', ['form_params' => $data]);
     }
 
-    protected function httpPostMultipart(string $url, array $data = [])
+    protected function httpPostMultipart(string $url, array $data = []): float|object|array|bool|int|string|null
     {
         $settleData = [];
         foreach ($data as $key => $value) {
@@ -120,7 +120,7 @@ abstract class BaseProvider
             $responseBody = $response->getBody()->getContents();
 
             if ($response->getStatusCode() === HttpStatusCode::OK) {
-                return json_decode($responseBody, true);
+                return Json::decode($responseBody, true);
             }
             throw new ProviderException(Code::ERROR_REQUEST_SERVICE);
         } catch (\Exception $ex) {

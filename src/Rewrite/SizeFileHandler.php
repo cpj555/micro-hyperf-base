@@ -5,6 +5,7 @@ namespace Losingbattle\MicroBase\Rewrite;
 
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Monolog\LogRecord;
 use Monolog\Utils;
 
 class SizeFileHandler extends StreamHandler
@@ -41,7 +42,7 @@ class SizeFileHandler extends StreamHandler
         }
     }
 
-    public function write(array $record): void
+    public function write(LogRecord $record): void
     {
         // on the first record written, if the log is new, we should rotate (once per day)
         if ($this->mustRotate === null) {

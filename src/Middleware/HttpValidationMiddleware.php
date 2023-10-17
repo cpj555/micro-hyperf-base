@@ -49,7 +49,7 @@ class HttpValidationMiddleware implements MiddlewareInterface
             $reflectionMethod = ReflectionManager::reflectMethod($requestHandler, $method);
             $parameters = $reflectionMethod->getParameters();
             foreach ($parameters as $parameter) {
-                if ($parameter->getClass() === null) {
+                if ($parameter->getType() === null) {
                     continue;
                 }
 

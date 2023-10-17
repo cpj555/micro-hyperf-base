@@ -12,14 +12,14 @@ use Psr\Log\LoggerInterface;
 
 class RedisAspect extends AbstractAspect
 {
-    public $classes = [
+    public array $classes = [
         Redis::class . '::__call',
     ];
 
     /**
      * @var LoggerInterface
      */
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(ContainerInterface $container)
     {

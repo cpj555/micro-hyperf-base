@@ -49,7 +49,7 @@ class JsonRpcValidationMiddleware implements MiddlewareInterface
             $reflectionMethod = ReflectionManager::reflectMethod($requestHandler, $method);
             $parameters = $reflectionMethod->getParameters();
             foreach ($parameters as $key => $parameter) {
-                if ($parameter->getClass() === null) {
+                if ($parameter->getType() === null) {
                     continue;
                 }
 

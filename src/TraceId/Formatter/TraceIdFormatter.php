@@ -5,14 +5,15 @@ namespace Losingbattle\MicroBase\TraceId\Formatter;
 
 use Losingbattle\MicroBase\Constants\Env;
 use Losingbattle\MicroBase\Contract\TraceIdGeneratorInterface;
-use Hyperf\Utils\ApplicationContext;
+use Hyperf\Context\ApplicationContext;
 use Monolog\Formatter\LineFormatter;
+use Monolog\LogRecord;
 
 class TraceIdFormatter extends LineFormatter
 {
     public const SIMPLE_FORMAT = "%datetime% [ %channel% ] %level_name% %trace_id% - %message% %context% %extra% \n";
 
-    public function format(array $record): string
+    public function format(LogRecord $record): string
     {
         $container = ApplicationContext::getContainer();
 

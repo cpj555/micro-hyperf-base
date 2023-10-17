@@ -7,8 +7,8 @@ use Losingbattle\MicroBase\Constants\Code;
 use Losingbattle\MicroBase\Constants\ResponseConstants;
 use Losingbattle\MicroBase\Exception\CodeException;
 use Hyperf\HttpServer\Contract\ResponseInterface;
-use Hyperf\Utils\ApplicationContext;
-use Hyperf\Utils\Collection;
+use Hyperf\Context\ApplicationContext;
+use Hyperf\Collection\Collection;
 
 class Response
 {

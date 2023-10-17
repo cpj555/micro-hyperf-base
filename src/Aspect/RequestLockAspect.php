@@ -14,18 +14,18 @@ use Hyperf\Redis\Redis;
 
 class RequestLockAspect extends AbstractAspect
 {
-    public $annotations = [
+    public array $annotations = [
         RequestLock::class,
     ];
 
     /**
      * @var RequestInterface
      */
-    private $request;
+    private RequestInterface $request;
 
     private $config;
 
-    private $redis;
+    private Redis $redis;
 
     public function __construct(ConfigInterface $config, RequestInterface $request, Redis $redis)
     {

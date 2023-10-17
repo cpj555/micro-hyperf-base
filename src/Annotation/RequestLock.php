@@ -3,28 +3,24 @@
 declare(strict_types=1);
 namespace Losingbattle\MicroBase\Annotation;
 
-use Doctrine\Common\Annotations\Annotation\Target;
+use Attribute;
 use Hyperf\Di\Annotation\AbstractAnnotation;
 use Hyperf\Di\Annotation\AnnotationInterface;
-use Hyperf\Utils\Str;
+use Hyperf\Stringable\Str;
 
-/**
- * @Annotation
- * @Target({"METHOD"})
- */
+#[Attribute( Attribute::TARGET_METHOD)]
 class RequestLock extends AbstractAnnotation implements AnnotationInterface
 {
-    public $ttl;
+    public int $ttl;
 
-    public $endRelease;
+    public bool $endRelease;
 
-    public $requestArgs;
+    public false|array $requestArgs;
 
-    public $message;
+    public string $message;
 
     public function __construct($value = null)
     {
-        parent::__construct($value);
 
         if (isset($value['requestArgs'])) {
             $requestArgs = [];

@@ -3,8 +3,8 @@
 declare(strict_types=1);
 namespace Losingbattle\MicroBase\Rewrite;
 
-use Hyperf\Utils\Coroutine;
-use Hyperf\Utils\WaitGroup;
+use Hyperf\Coroutine\Coroutine;
+use Hyperf\Coroutine\WaitGroup;
 use Swoole\Coroutine\Channel;
 
 class Parallel

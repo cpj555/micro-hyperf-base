@@ -7,12 +7,13 @@ use Losingbattle\MicroBase\Constants\Env;
 use Losingbattle\MicroBase\TraceId;
 use Hyperf\Context\Context;
 use Monolog\Formatter\LineFormatter;
+use Monolog\LogRecord;
 
 class TraceIdContextFormatter extends LineFormatter
 {
     public const SIMPLE_FORMAT = "%datetime% [ %channel% ] %level_name% %trace_id% - %message% %context% %extra% \n";
 
-    public function format(array $record): string
+    public function format(LogRecord $record): string
     {
         $output = parent::format($record);
 

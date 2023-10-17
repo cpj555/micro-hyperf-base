@@ -3,7 +3,7 @@
 declare(strict_types=1);
 namespace Losingbattle\MicroBase\Structure;
 
-use Hyperf\Utils\Collection;
+use Hyperf\Collection\Collection;
 
 class PageList extends Collection
 {
