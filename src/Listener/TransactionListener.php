@@ -12,6 +12,7 @@ use Psr\Container\ContainerInterface;
 
 class TransactionListener implements ListenerInterface
 {
+
     public function __construct(ContainerInterface $container)
     {
         $this->logger = $container->get(LoggerFactory::class)->get('sql');

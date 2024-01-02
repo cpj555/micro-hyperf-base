@@ -6,8 +6,8 @@ namespace Losingbattle\MicroBase\Listener;
 use Hyperf\Database\Events\QueryExecuted;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Logger\LoggerFactory;
-use Hyperf\Utils\Arr;
-use Hyperf\Utils\Str;
+use Hyperf\Collection\Arr;
+use Hyperf\Stringable\Str;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 

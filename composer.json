@@ -28,7 +28,7 @@
         "hyperf/database": "~3.0.0",
         "inhere/php-validate": "^2.7",
         "hyperf/redis":"~3.0.0",
-        "hyperf/config": "~3.0.0",
+        "hyperf/config": "^3.0",
         "hyperf/service-governance": "~3.0.0",
         "hyperf/snowflake": "~3.0.0",
         "hyperf/guzzle": "~3.0.0",

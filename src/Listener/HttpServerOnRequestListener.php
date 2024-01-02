@@ -3,12 +3,12 @@
 declare(strict_types=1);
 namespace Losingbattle\MicroBase\Listener;
 
+use Hyperf\Collection\Arr;
+use Hyperf\HttpServer\Event\RequestTerminated;
 use Losingbattle\MicroBase\Constants\HeaderKeys;
-use Losingbattle\MicroBase\Events\OnRequestExecuted;
 use Losingbattle\MicroBase\Utils\Str;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Logger\LoggerFactory;
-use Hyperf\Utils\Arr;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
@@ -27,37 +27,29 @@ class HttpServerOnRequestListener implements ListenerInterface
     public function listen(): array
     {
         return [
-            OnRequestExecuted::class,
+            RequestTerminated::class,
         ];
     }
 
     public function process(object $event): void
     {
-        if ($event instanceof OnRequestExecuted) {
-            if ($event->method === 'OPTIONS') {
+        if ($event instanceof RequestTerminated) {
+            if ($event->request->getMethod() === 'OPTIONS') {
                 return;
             }
             //包含关键字不记录请求体
-            if (Str::existsInUri($event->path, ['liveness', 'favicon', 'heartbeat'])) {
+            if (Str::existsInUri($event->request->getUri()->getPath(), ['liveness', 'favicon', 'heartbeat'])) {
                 return;
             }
 
             $recordHeader = [];
-            $headerKeys = config('request.listener.record_header_keys', []);
+            $headerKeys = \Hyperf\Config\config('request.listener.record_header_keys', []);
             $headerKeys = array_merge($headerKeys, [
                 HeaderKeys::X_FORWARDED_FOR, HeaderKeys::X_REAL_IP,
             ]);
 
-//            if ($event->serverName == 'cloudr-rpc') {
-//                $headerKeys = array_merge($headerKeys, [SideCarHeaderKeys::RPC_CONTEXT,
-//                    SideCarHeaderKeys::RPC_STREAM_LENGTH,
-//                    SideCarHeaderKeys::RPC_STREAM_OFFSET,
-//                    SideCarHeaderKeys::RPC_STREAM_PROTO_VERSION,
-//                    SideCarHeaderKeys::RPC_OK, ]);
-//            }
-
             foreach ($headerKeys as $headerKey) {
-                $v = Arr::get($event->requestHeaders, strtolower($headerKey), []);
+                $v = Arr::get($event->request->getHeaders(), strtolower($headerKey), []);
 
                 $value = \is_string($v) ? $v : Arr::first($v);
                 if ($value === null) {
@@ -66,9 +58,15 @@ class HttpServerOnRequestListener implements ListenerInterface
                 $recordHeader[$headerKey] = $value;
             }
 
-            $this->logger->info($event->serverName, $event->toArray([
+            $this->logger->info($event->server, [
                 'record_header' => $recordHeader,
-            ]));
+//                'time' => $this->,
+                'path' => $event->request->getUri()->getPath(),
+                'method' => $event->request->getMethod(),
+                'queryParams' => $event->request->getQueryParams(),
+                'requestBody' => $event->request->getParsedBody(),
+                'responseBody' =>json_decode($event->response->getBody()->getContents(), true) ?: $event->response->getBody()->getContents(),
+            ]);
         }
     }
 }
