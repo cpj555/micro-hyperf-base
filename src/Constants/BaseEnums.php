@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-namespace App\Common\Constants;
+namespace Losingbattle\MicroBase\Constants;
 
 class BaseEnums
 {
