@@ -40,7 +40,7 @@ class ConfigProvider
                         __DIR__,
                     ],
                     'class_map' => [
-                        \Hyperf\Database\Query\Grammars\Grammar::class => BASE_PATH . '/vendor/Losingbattle/micro-base/class_map/hyperf/database/src/Query/Grammars/Grammar.php',
+                        \Hyperf\Database\Query\Grammars\MySqlGrammar::class => BASE_PATH . '/vendor/Losingbattle/micro-base/class_map/hyperf/database/src/Query/Grammars/MySqlGrammar.php',
                         \Hyperf\Database\Query\Builder::class => BASE_PATH . '/vendor/Losingbattle/micro-base/class_map/hyperf/database/src/Query/Builder.php',
                     ],
                 ],
