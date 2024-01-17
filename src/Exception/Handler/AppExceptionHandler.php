@@ -20,10 +20,6 @@ use Throwable;
 
 class AppExceptionHandler extends HttpExceptionHandler
 {
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
 
     /** @var ContainerInterface */
     private $container;
@@ -38,11 +34,10 @@ class AppExceptionHandler extends HttpExceptionHandler
      */
     private $reponseResult;
 
-    public function __construct(ContainerInterface $container, LoggerFactory $loggerFactory, EventDispatcherInterface $eventDispatcher)
+    public function __construct(ContainerInterface $container,EventDispatcherInterface $eventDispatcher)
     {
         $this->container = $container;
         $this->reponseResult = $this->container->get(ResponseResultInterface::class);
-        $this->logger = $loggerFactory->get('exception', 'exception');
         $this->eventDispatcher = $eventDispatcher;
     }
 

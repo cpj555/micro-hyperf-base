@@ -21,10 +21,6 @@ use Throwable;
 
 class RpcExceptionHandler extends HttpExceptionHandler
 {
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
 
     /** @var ContainerInterface */
     private $container;
@@ -39,11 +35,10 @@ class RpcExceptionHandler extends HttpExceptionHandler
      */
     private $reponseResult;
 
-    public function __construct(ContainerInterface $container, LoggerFactory $loggerFactory, EventDispatcherInterface $eventDispatcher)
+    public function __construct(ContainerInterface $container,EventDispatcherInterface $eventDispatcher)
     {
         $this->container = $container;
         $this->reponseResult = $this->container->get(OrResponseResult::class);
-        $this->logger = $loggerFactory->get('rpc_server', 'exception');
         $this->eventDispatcher = $eventDispatcher;
     }
 
