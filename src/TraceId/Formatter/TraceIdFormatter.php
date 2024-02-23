@@ -8,6 +8,7 @@ use Losingbattle\MicroBase\Contract\TraceIdGeneratorInterface;
 use Hyperf\Context\ApplicationContext;
 use Monolog\Formatter\LineFormatter;
 use Monolog\LogRecord;
+use function Hyperf\Support\env;
 
 class TraceIdFormatter extends LineFormatter
 {

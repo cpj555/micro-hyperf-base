@@ -72,7 +72,7 @@ if (! function_exists('logname')) {
 if (! function_exists('producer')) {
     function producer(): Losingbattle\RocketMqHttp\Producer
     {
-        return \Hyperf\Utils\ApplicationContext::getContainer()->get(\Losingbattle\RocketMqHttp\Producer::class);
+        return \Hyperf\Context\ApplicationContext::getContainer()->get(\Losingbattle\RocketMqHttp\Producer::class);
     }
 }
 

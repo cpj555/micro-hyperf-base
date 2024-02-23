@@ -5,6 +5,7 @@ namespace Losingbattle\MicroBase\Node;
 
 use Losingbattle\MicroBase\Contract\NodeInterface;
 use Psr\Container\ContainerInterface;
+use function Hyperf\Support\env;
 
 class NodeGenerator implements NodeInterface
 {

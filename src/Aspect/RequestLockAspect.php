@@ -11,6 +11,7 @@ use Hyperf\Di\Aop\AbstractAspect;
 use Hyperf\Di\Aop\ProceedingJoinPoint;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\Redis\Redis;
+use function Hyperf\Support\env;
 
 class RequestLockAspect extends AbstractAspect
 {
