@@ -1,6 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
+use function Hyperf\Support\env;
+
 if (! function_exists('redis')) {
     /**
      * @param string $poolName
