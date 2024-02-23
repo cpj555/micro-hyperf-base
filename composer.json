@@ -15,27 +15,27 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.1",
         "ext-json": "*",
         "ext-bcmath": "*",
         "ext-redis": "*",
-        "hyperf/http-server": "~3.0.0",
-        "hyperf/context": "~3.0.0",
-        "hyperf/utils": "~3.0.0",
-        "hyperf/di": "~3.0.0",
-        "hyperf/logger": "~3.0.0",
-        "hyperf/db-connection": "~3.0.0",
-        "hyperf/database": "~3.0.0",
+        "hyperf/http-server": "~3.1.0",
+        "hyperf/context": "~3.1.0",
+        "hyperf/utils": "~3.1.0",
+        "hyperf/di": "~3.1.0",
+        "hyperf/logger": "~3.1.0",
+        "hyperf/db-connection": "~3.1.0",
+        "hyperf/database": "~3.1.0",
         "inhere/php-validate": "^2.7",
-        "hyperf/redis":"~3.0.0",
-        "hyperf/config": "^3.0",
-        "hyperf/service-governance": "~3.0.0",
-        "hyperf/snowflake": "~3.0.0",
-        "hyperf/guzzle": "~3.0.0",
+        "hyperf/redis":"~3.1.0",
+        "hyperf/config": "~3.1.0",
+        "hyperf/service-governance": "~3.1.0",
+        "hyperf/snowflake": "~3.1.0",
+        "hyperf/guzzle": "~3.1.0",
         "ramsey/uuid": "^4.1"
     },
     "require-dev": {
-        "swoole/ide-helper": "^4.5"
+        "swoole/ide-helper": "^5.0"
     },
     "autoload": {
         "files": [
