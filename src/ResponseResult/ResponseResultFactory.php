@@ -1,12 +1,13 @@
 <?php
 
 declare(strict_types=1);
+
 namespace Losingbattle\MicroBase\ResponseResult;
 
-use Losingbattle\MicroBase\Constants\ResponseStruct;
-use Losingbattle\MicroBase\Contract\ResponseResultInterface;
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Di\ReflectionManager;
+use Losingbattle\MicroBase\Constants\ResponseStruct;
+use Losingbattle\MicroBase\Contract\ResponseResultInterface;
 use Psr\Container\ContainerInterface;
 
 class ResponseResultFactory

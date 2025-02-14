@@ -1,14 +1,15 @@
 <?php
 
 declare(strict_types=1);
+
 namespace Losingbattle\MicroBase\Utils;
 
+use Hyperf\Collection\Collection;
+use Hyperf\Context\ApplicationContext;
+use Hyperf\HttpServer\Contract\ResponseInterface;
 use Losingbattle\MicroBase\Constants\Code;
 use Losingbattle\MicroBase\Constants\ResponseConstants;
 use Losingbattle\MicroBase\Exception\CodeException;
-use Hyperf\HttpServer\Contract\ResponseInterface;
-use Hyperf\Context\ApplicationContext;
-use Hyperf\Collection\Collection;
 
 class Response
 {
@@ -39,7 +40,7 @@ class Response
             $array = $emptyType;
         }
 
-        $responseMessageKey = config('response.message_key', 'message');
+        $responseMessageKey = \Hyperf\Config\config('response.message_key', 'message');
 
         $data = [
             'code' => $code,
@@ -52,7 +53,7 @@ class Response
 
     public static function withError($code, string $message = '')
     {
-        $message = $message ?  : Code::getMessage($code);
+        $message = $message ?: Code::getMessage($code);
         return self::withJson(null, $message, $code);
     }
 }

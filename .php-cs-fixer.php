@@ -1,34 +1,29 @@
 <?php
 
-declare(strict_types=1);
-
 $header = <<<'EOF'
 EOF;
 
-$finder = PhpCsFixer\Finder::create()
-    ->exclude('tests/Fixtures')
-    ->in(__DIR__)
-    ->append([
-        __DIR__.'/dev-tools/doc.php',
-        // __DIR__.'/php-cs-fixer', disabled, as we want to be able to run bootstrap file even on lower PHP version, to show nice message
-    ])
-;
-
-$config = new PhpCsFixer\Config();
-$config
+return (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
     ->setRules([
-        '@PHP74Migration:risky' => true,
-        '@PHPUnit75Migration:risky' => true,
-        '@PhpCsFixer:risky' => true,
+        '@PSR2' => true,
+        '@Symfony' => true,
+        '@DoctrineAnnotation' => true,
+        '@PhpCsFixer' => true,
+        'header_comment' => [
+            'comment_type' => 'PHPDoc',
+            'header' => $header,
+            'separate' => 'none',
+            'location' => 'after_declare_strict',
+        ],
         'array_syntax' => [
-            'syntax' => 'short',
+            'syntax' => 'short'
         ],
         'list_syntax' => [
-            'syntax' => 'short',
+            'syntax' => 'short'
         ],
         'concat_space' => [
-            'spacing' => 'one',
+            'spacing' => 'one'
         ],
         'blank_line_before_statement' => [
             'statements' => [
@@ -37,7 +32,7 @@ $config
         ],
         'general_phpdoc_annotation_remove' => [
             'annotations' => [
-                'author',
+                'author'
             ],
         ],
         'ordered_imports' => [
@@ -79,27 +74,12 @@ $config
         'single_quote' => true,
         'standardize_not_equals' => true,
         'multiline_comment_opening_closing' => true,
-        'phpdoc_add_missing_param_annotation'=>['only_untyped' => false],
-        'header_comment' => ['header' => $header],
     ])
-    ->setFinder($finder)
-;
-
-// special handling of fabbot.io service if it's using too old PHP CS Fixer version
-if (false !== getenv('FABBOT_IO')) {
-    try {
-        PhpCsFixer\FixerFactory::create()
-            ->registerBuiltInFixers()
-            ->registerCustomFixers($config->getCustomFixers())
-            ->useRuleSet(new PhpCsFixer\RuleSet($config->getRules()))
-        ;
-    } catch (PhpCsFixer\ConfigurationException\InvalidConfigurationException $e) {
-        $config->setRules([]);
-    } catch (UnexpectedValueException $e) {
-        $config->setRules([]);
-    } catch (InvalidArgumentException $e) {
-        $config->setRules([]);
-    }
-}
-
-return $config;
+    ->setFinder(
+        PhpCsFixer\Finder::create()
+            ->exclude('public')
+            ->exclude('runtime')
+            ->exclude('vendor')
+            ->in(__DIR__)
+    )
+    ->setUsingCache(false);

@@ -6,13 +6,9 @@ namespace Losingbattle\MicroBase\Aspect;
 use Losingbattle\MicroBase\Annotation\ResponseResult;
 use Losingbattle\MicroBase\Constants\ResponseConstants;
 use Losingbattle\MicroBase\Contract\ResponseResultInterface;
-use Hyperf\Di\Annotation\Aspect;
 use Hyperf\Di\Aop\AbstractAspect;
 use Hyperf\Di\Aop\ProceedingJoinPoint;
 
-/**
- * @Aspect
- */
 class ResponseResultAspect extends AbstractAspect
 {
     public array $annotations = [
