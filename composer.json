@@ -27,14 +27,14 @@
         "hyperf/logger": "~3.1.0",
         "hyperf/db-connection": "~3.1.0",
         "hyperf/database": "~3.1.0",
-        "inhere/php-validate": "^2.7",
         "hyperf/redis":"~3.1.0",
         "hyperf/config": "~3.1.0",
         "hyperf/service-governance": "~3.1.0",
         "hyperf/snowflake": "~3.1.0",
         "hyperf/guzzle": "~3.1.0",
         "ramsey/uuid": "^4.1",
-        "hyperf/constants": "~3.1.0"
+        "hyperf/constants": "~3.1.0",
+        "hyperf/validation": "^3.1"
     },
     "require-dev": {
         "swoole/ide-helper": "^5.0"

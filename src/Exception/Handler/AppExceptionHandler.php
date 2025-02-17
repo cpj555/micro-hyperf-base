@@ -3,6 +3,8 @@
 declare(strict_types=1);
 namespace Losingbattle\MicroBase\Exception\Handler;
 
+use Hyperf\Validation\ValidationException;
+use Hyperf\Validation\ValidationExceptionHandler;
 use Losingbattle\MicroBase\Constants\Code;
 use Losingbattle\MicroBase\Contract\ResponseResultInterface;
 use Losingbattle\MicroBase\Events\ExceptionExecuted;
@@ -12,6 +14,7 @@ use Hyperf\HttpMessage\Exception\BadRequestHttpException;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Exception\Handler\HttpExceptionHandler;
 use Hyperf\Logger\LoggerFactory;
+use Losingbattle\MicroBase\Exception\ParamErrorException;
 use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -43,6 +46,7 @@ class AppExceptionHandler extends HttpExceptionHandler
 
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
+
         // 0 为 success 码 未捕捉的转为500
         if ($throwable->getCode() === 0) {
             $code = Code::SERVER_ERROR;
@@ -56,13 +60,16 @@ class AppExceptionHandler extends HttpExceptionHandler
         }
 
         switch (true) {
+            case $throwable instanceof ValidationException:
+                $throwable =  new ParamErrorException($throwable->validator->errors()->first(), Code::ERROR_PARAMS);
+                return $this->reponseResult->returnError(Code::ERROR_PARAMS, $throwable);
             case ! $throwable instanceof BaseException:
             case $throwable instanceof AlertException:
             case $throwable instanceof \ErrorException:
-            /** @var RequestInterface $r */
-            $r = $this->container->get(RequestInterface::class);
-            $this->eventDispatcher->dispatch(new ExceptionExecuted($throwable, $r));
-            break;
+                /** @var RequestInterface $r */
+                $r = $this->container->get(RequestInterface::class);
+                $this->eventDispatcher->dispatch(new ExceptionExecuted($throwable, $r));
+                break;
         }
         $this->stopPropagation();
         return $this->reponseResult->returnError($code, $throwable);

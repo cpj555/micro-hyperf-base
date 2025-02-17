@@ -10,7 +10,7 @@ use Hyperf\Constants\Annotation\Message;
 use Hyperf\Constants\EnumConstantsTrait;
 
 #[Constants]
-class Code
+enum Code
 {
     use EnumConstantsTrait;
 
