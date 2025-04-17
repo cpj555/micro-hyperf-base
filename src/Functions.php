@@ -6,12 +6,13 @@ use function Hyperf\Support\env;
 
 if (! function_exists('redis')) {
     /**
-     * @param string $poolName
      * @return Redis
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    function redis()
+    function redis(): Redis
     {
-        $container = \Hyperf\Utils\ApplicationContext::getContainer();
+        $container = \Hyperf\Context\ApplicationContext::getContainer();
         return $container->get(\Hyperf\Redis\Redis::class);
     }
 }
@@ -92,7 +93,7 @@ if (! function_exists('getMacAddress')) {
     {
         $macAddresses = swoole_get_local_mac();
 
-        foreach (\Hyperf\Utils\Arr::wrap($macAddresses) as $name => $address) {
+        foreach (\Hyperf\Collection\Arr::wrap($macAddresses) as $name => $address) {
             if ($address && $address !== '00:00:00:00:00:00') {
                 return $name . ':' . str_replace(':', '', $address);
             }
@@ -103,7 +104,7 @@ if (! function_exists('getMacAddress')) {
 }
 
 if (! function_exists('get_class_name')) {
-    function get_class_name($classname)
+    function get_class_name(string $classname): bool|int|string
     {
         if ($pos = strrpos($classname, '\\')) {
             return substr($classname, $pos + 1);
